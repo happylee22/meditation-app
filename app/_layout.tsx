@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 import './global.css';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import TimerProvider from '@/context/TimerContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -33,9 +34,16 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+    <TimerProvider>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="meditate/[id]" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="modal/adjust-meditaion-duration"
+          options={{ headerShown: false, presentation: 'modal' }}
+        />
+      </Stack>
+    </TimerProvider>
   );
 }
